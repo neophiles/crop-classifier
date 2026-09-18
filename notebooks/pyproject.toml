@@ -1,0 +1,16 @@
+[project]
+name = "notebooks"
+version = "0.1.0"
+description = "Add your description here"
+authors = [
+    { name = "neophiles", email = "mnv.tagle@gmail.com" }
+]
+requires-python = ">=3.13"
+dependencies = []
+
+[project.scripts]
+notebooks = "notebooks:main"
+
+[build-system]
+requires = ["uv_build>=0.12.15,<0.13.0"]
+build-backend = "uv_build"
