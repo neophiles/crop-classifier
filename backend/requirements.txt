@@ -3,3 +3,4 @@ sqlmodel
 asyncpg
 alembic
 model
+scipy
