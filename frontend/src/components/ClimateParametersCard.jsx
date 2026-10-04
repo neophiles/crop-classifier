@@ -9,6 +9,7 @@ export default function ClimateParametersCard({ inputs, onChange }) {
   const [statusMsg, setStatusMsg] = useState(null)
   const [isError, setIsError] = useState(false)
   const [locationName, setLocationName] = useState(null)
+  const [weatherUpdatedAt, setWeatherUpdatedAt] = useState(null)
 
   // Search input state
   const [searchQuery, setSearchQuery] = useState('')
@@ -27,6 +28,7 @@ export default function ClimateParametersCard({ inputs, onChange }) {
       onChange('humidity_percent', weather.humidity_percent)
       onChange('rainfall_mm', weather.rainfall_mm)
 
+      setWeatherUpdatedAt(new Date())
       setLocationName(displayName || `Coordinates: ${latitude.toFixed(2)}°, ${longitude.toFixed(2)}°`)
       setStatusMsg('Weather updated successfully.')
       setSearchResults([])
@@ -57,6 +59,7 @@ export default function ClimateParametersCard({ inputs, onChange }) {
       onChange('humidity_percent', weather.humidity_percent)
       onChange('rainfall_mm', weather.rainfall_mm)
 
+      setWeatherUpdatedAt(new Date())
       const name = resolvedLocation
         ? `${resolvedLocation} (${latitude.toFixed(2)}°, ${longitude.toFixed(2)}°)`
         : `Coordinates: ${latitude.toFixed(2)}°, ${longitude.toFixed(2)}°`
@@ -103,11 +106,52 @@ export default function ClimateParametersCard({ inputs, onChange }) {
     }
   }
 
+  const formattedWeatherDate = weatherUpdatedAt
+    ? new Intl.DateTimeFormat('en-US', {
+      weekday: 'long',
+      month: 'long',
+      year: 'numeric',
+    }).format(weatherUpdatedAt)
+    : null
+
+  const formattedWeatherTime = weatherUpdatedAt
+    ? new Intl.DateTimeFormat('en-US', {
+      hour: 'numeric',
+      minute: '2-digit',
+    }).format(weatherUpdatedAt)
+    : null
+
   return (
-    <fieldset className="fieldset rounded-box border border-base-300 bg-base-100 p-4">
-      <legend className="fieldset-legend px-1 text-base font-semibold">
-        Climate & Farm Parameters
-      </legend>
+    <section className="flex flex-col gap-3">
+      <h2 className="text-[15px] font-bold text-base-content/70">
+        Today&apos;s Forecast
+      </h2>
+      <fieldset className="fieldset rounded-box border border-base-300 bg-base-100 p-4 shadow-sm">
+
+        <div className="mb-4 flex flex-row items-center justify-between gap-3 rounded-box bg-base-200 px-4 py-5">
+          <div>
+            <strong className="text-[48px] font-bold leading-none text-[#D98308]">
+              {inputs.temperature_c.toFixed(0)}°
+            </strong>
+            <span className="mt-2 block text-[8px] text-base-content/70">
+              {locationName || 'Select a location for live weather'}
+            </span>
+          </div>
+          <div className="flex items-center gap-3 text-left sm:text-right">
+            <div>
+              {formattedWeatherDate && (
+                <span className="block text-[10px] font-semibold text-base-content/70">
+                  {formattedWeatherDate}
+                </span>
+              )}
+              {formattedWeatherTime && (
+                <span className="block text-[10px] font-semibold text-base-content/70">
+                  {formattedWeatherTime}
+                </span>
+              )}
+            </div>
+          </div>
+        </div>
 
       {/* Location Search & GPS Controls */}
       <div className="mb-4">
@@ -140,7 +184,7 @@ export default function ClimateParametersCard({ inputs, onChange }) {
             type="button"
             onClick={handleGPSLocation}
             disabled={loading}
-            className="btn btn-secondary btn-sm"
+            className="btn btn-sm rounded-full border-[#D98308] bg-[#D98308] text-white hover:border-[#C27607] hover:bg-[#C27607]"
           >
             Use GPS
           </button>
@@ -169,35 +213,6 @@ export default function ClimateParametersCard({ inputs, onChange }) {
         )}
       </div>
 
-      {/* Open-Meteo Readings & Active Location Display */}
-      <div className="mb-4 rounded-box border border-base-300 bg-base-200 p-3">
-        <div className="mb-2 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
-          <span className="text-sm font-semibold text-base-content/70">
-            Open-Meteo Readings
-          </span>
-          {locationName && (
-            <span className="text-sm font-semibold text-primary">
-              Location: {locationName}
-            </span>
-          )}
-        </div>
-
-        <div className="grid grid-cols-1 gap-3 text-center sm:grid-cols-3">
-          <div>
-            <span className="block text-xs text-base-content/60">Temperature</span>
-            <strong className="text-sm">{inputs.temperature_c.toFixed(1)} °C</strong>
-          </div>
-          <div>
-            <span className="block text-xs text-base-content/60">Humidity</span>
-            <strong className="text-sm">{inputs.humidity_percent.toFixed(0)} %</strong>
-          </div>
-          <div>
-            <span className="block text-xs text-base-content/60">Rainfall</span>
-            <strong className="text-sm">{inputs.rainfall_mm.toFixed(1)} mm</strong>
-          </div>
-        </div>
-      </div>
-
       {/* Farm Area Slider */}
       <SliderInput
         label="Farm Area"
@@ -207,7 +222,9 @@ export default function ClimateParametersCard({ inputs, onChange }) {
         max={20}
         step={0.1}
         unit="ha"
+        soilStyle
       />
-    </fieldset>
+      </fieldset>
+    </section>
   )
 }
