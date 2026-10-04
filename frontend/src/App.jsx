@@ -69,7 +69,9 @@ export default function App() {
           </button>
         </form>
 
-        <HistoryPanel />
+        <div className="hidden">
+          <HistoryPanel />
+        </div>
       </div>
 
       {isLoading ? (
@@ -82,7 +84,7 @@ export default function App() {
         </section>
       ) : result ? (
         <section className="mx-auto flex w-full max-w-2xl flex-col gap-4">
-          <ResultsPanel result={result} areaHa={inputs.area_ha} />
+          <ResultsPanel result={result} areaHa={inputs.area_ha} inputs={inputs} />
           <button
             type="button"
             onClick={handleBackToInputs}
