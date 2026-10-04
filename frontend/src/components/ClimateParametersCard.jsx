@@ -128,17 +128,17 @@ export default function ClimateParametersCard({ inputs, onChange }) {
       </h2>
       <fieldset className="fieldset rounded-box border border-base-300 bg-base-100 p-4 shadow-sm">
 
-        <div className="mb-4 flex flex-row items-center justify-between gap-3 rounded-box bg-base-200 px-4 py-5">
-          <div>
+        <div className="mb-4 rounded-box border border-base-300 bg-base-100 px-4 py-5">
+          <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3">
+            <div className="min-w-0">
             <strong className="text-[48px] font-bold leading-none text-[#D98308]">
               {inputs.temperature_c.toFixed(0)}°
             </strong>
-            <span className="mt-2 block text-[8px] text-base-content/70">
+            <span className="mt-2 block whitespace-nowrap text-[8px] text-base-content/70">
               {locationName || 'Select a location for live weather'}
             </span>
-          </div>
-          <div className="flex items-center gap-3 text-left sm:text-right">
-            <div>
+            </div>
+            <div className="min-w-0 text-left">
               {formattedWeatherDate && (
                 <span className="block text-[10px] font-semibold text-base-content/70">
                   {formattedWeatherDate}
@@ -150,8 +150,24 @@ export default function ClimateParametersCard({ inputs, onChange }) {
                 </span>
               )}
             </div>
+              <div className="flex h-20 w-20 items-center justify-center" aria-label="Weather illustration">
+                <svg viewBox="0 0 96 72" role="img" aria-hidden="true" className="h-full w-full">
+                  <circle cx="65" cy="24" r="16" fill="#FFD447" />
+                  <g stroke="#F3B51B" strokeLinecap="round" strokeWidth="3">
+                    <path d="M65 2v7M65 39v7M43 24h7M80 24h7M49 8l5 5M76 35l5 5M81 8l-5 5" />
+                  </g>
+                  <path
+                    d="M25 54c-9 0-16-6-16-14s7-14 16-14c2-10 11-17 22-17 12 0 21 8 23 19 8 0 15 6 15 14s-7 12-16 12H25Z"
+                    fill="#B9E2F8"
+                  />
+                  <g stroke="#198CE3" strokeLinecap="round" strokeWidth="3">
+                    <path d="m28 59-4 7M47 59l-4 7M66 59l-4 7" />
+                  </g>
+                </svg>
+              </div>
+            </div>
+            <div className="mt-4 border-t border-base-300" />
           </div>
-        </div>
 
       {/* Location Search & GPS Controls */}
       <div className="mb-4">
