@@ -104,15 +104,15 @@ export default function ClimateParametersCard({ inputs, onChange }) {
   }
 
   return (
-    <fieldset style={{ margin: 0, padding: '10px 14px', border: '1px solid #ccc', borderRadius: '4px' }}>
-      <legend style={{ fontSize: '13px', padding: '0 6px' }}>
-        <strong>Climate & Farm Parameters</strong>
+    <fieldset className="fieldset rounded-box border border-base-300 bg-base-100 p-4">
+      <legend className="fieldset-legend px-1 text-base font-semibold">
+        Climate & Farm Parameters
       </legend>
 
       {/* Location Search & GPS Controls */}
-      <div style={{ marginBottom: '8px' }}>
+      <div className="mb-4">
         {/* City Search Controls */}
-        <div style={{ display: 'flex', gap: '4px', marginBottom: '6px' }}>
+        <div className="flex flex-col gap-2 sm:flex-row">
           <input
             type="text"
             placeholder="Search other city/province..."
@@ -125,23 +125,14 @@ export default function ClimateParametersCard({ inputs, onChange }) {
               }
             }}
             disabled={loading}
-            style={{
-              flex: 1,
-              padding: '4px 6px',
-              fontSize: '12px',
-              border: '1px solid #999',
-              borderRadius: '3px',
-            }}
+            aria-label="Search for a city or province"
+            className="input input-bordered input-sm w-full sm:flex-1"
           />
           <button
             type="button"
             onClick={handleSearchSubmit}
             disabled={loading || !searchQuery.trim()}
-            style={{
-              padding: '4px 8px',
-              fontSize: '12px',
-              cursor: loading ? 'not-allowed' : 'pointer',
-            }}
+            className="btn btn-outline btn-sm"
           >
             Search
           </button>
@@ -149,11 +140,7 @@ export default function ClimateParametersCard({ inputs, onChange }) {
             type="button"
             onClick={handleGPSLocation}
             disabled={loading}
-            style={{
-              padding: '4px 8px',
-              fontSize: '12px',
-              cursor: loading ? 'not-allowed' : 'pointer',
-            }}
+            className="btn btn-secondary btn-sm"
           >
             Use GPS
           </button>
@@ -161,19 +148,13 @@ export default function ClimateParametersCard({ inputs, onChange }) {
 
         {/* Dropdown choices if multiple cities found */}
         {searchResults.length > 1 && (
-          <div style={{ backgroundColor: '#fff', border: '1px solid #ccc', borderRadius: '3px', padding: '4px', marginBottom: '6px', fontSize: '11px', maxHeight: '100px', overflowY: 'auto' }}>
-            <span style={{ color: '#666', display: 'block', marginBottom: '2px', fontWeight: 'bold' }}>Choose location:</span>
+          <div className="mt-2 max-h-32 overflow-y-auto rounded-box border border-base-300 bg-base-100 p-2 text-sm">
+            <span className="mb-1 block font-semibold text-base-content/70">Choose location:</span>
             {searchResults.map((place, idx) => (
               <div
                 key={idx}
                 onClick={() => applyWeatherForCoords(place.latitude, place.longitude, place.displayName)}
-                style={{
-                  padding: '3px 6px',
-                  cursor: 'pointer',
-                  borderBottom: idx < searchResults.length - 1 ? '1px solid #eee' : 'none',
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#f0f4f8')}
-                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
+                className={`cursor-pointer px-2 py-1.5 hover:bg-base-200 ${idx < searchResults.length - 1 ? 'border-b border-base-200' : ''}`}
               >
                 {place.displayName}
               </div>
@@ -182,51 +163,37 @@ export default function ClimateParametersCard({ inputs, onChange }) {
         )}
 
         {statusMsg && (
-          <div
-            style={{
-              fontSize: '11px',
-              marginBottom: '4px',
-              color: isError ? '#c62828' : '#2e7d32',
-            }}
-          >
+          <div className={`mt-2 text-sm ${isError ? 'text-error' : 'text-success'}`}>
             {statusMsg}
           </div>
         )}
       </div>
 
       {/* Open-Meteo Readings & Active Location Display */}
-      <div
-        style={{
-          padding: '8px 10px',
-          backgroundColor: '#f9f9f9',
-          border: '1px solid #ddd',
-          borderRadius: '4px',
-          marginBottom: '10px',
-        }}
-      >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-          <span style={{ fontSize: '11px', color: '#666', fontWeight: 'bold' }}>
+      <div className="mb-4 rounded-box border border-base-300 bg-base-200 p-3">
+        <div className="mb-2 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+          <span className="text-sm font-semibold text-base-content/70">
             Open-Meteo Readings
           </span>
           {locationName && (
-            <span style={{ fontSize: '11px', color: '#0055aa', fontWeight: 'bold' }}>
+            <span className="text-sm font-semibold text-primary">
               Location: {locationName}
             </span>
           )}
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '8px', textAlign: 'center' }}>
+        <div className="grid grid-cols-1 gap-3 text-center sm:grid-cols-3">
           <div>
-            <span style={{ display: 'block', fontSize: '10px', color: '#777' }}>Temperature</span>
-            <strong style={{ fontSize: '13px' }}>{inputs.temperature_c.toFixed(1)} °C</strong>
+            <span className="block text-xs text-base-content/60">Temperature</span>
+            <strong className="text-sm">{inputs.temperature_c.toFixed(1)} °C</strong>
           </div>
           <div>
-            <span style={{ display: 'block', fontSize: '10px', color: '#777' }}>Humidity</span>
-            <strong style={{ fontSize: '13px' }}>{inputs.humidity_percent.toFixed(0)} %</strong>
+            <span className="block text-xs text-base-content/60">Humidity</span>
+            <strong className="text-sm">{inputs.humidity_percent.toFixed(0)} %</strong>
           </div>
           <div>
-            <span style={{ display: 'block', fontSize: '10px', color: '#777' }}>Rainfall</span>
-            <strong style={{ fontSize: '13px' }}>{inputs.rainfall_mm.toFixed(1)} mm</strong>
+            <span className="block text-xs text-base-content/60">Rainfall</span>
+            <strong className="text-sm">{inputs.rainfall_mm.toFixed(1)} mm</strong>
           </div>
         </div>
       </div>

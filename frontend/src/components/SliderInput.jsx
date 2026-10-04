@@ -8,10 +8,10 @@ export default function SliderInput({
   unit = '',
 }) {
   return (
-    <div style={{ marginBottom: '8px' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', fontWeight: 'bold', marginBottom: '3px' }}>
+    <div className="form-control w-full">
+      <div className="mb-1 flex items-center justify-between text-sm font-semibold">
         <span>{label}</span>
-        <span>{value} {unit}</span>
+        <span className="text-base-content/70">{value} {unit}</span>
       </div>
       <input
         type="range"
@@ -23,9 +23,10 @@ export default function SliderInput({
           const val = step % 1 === 0 ? parseInt(e.target.value, 10) : parseFloat(e.target.value)
           onChange(val)
         }}
-        style={{ width: '100%', height: '12px', margin: '0', display: 'block' }}
+        aria-label={label}
+        className="range range-primary range-sm w-full"
       />
-      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10px', color: '#666', marginTop: '2px' }}>
+      <div className="mt-1 flex justify-between text-xs text-base-content/60">
         <span>{min}</span>
         <span>{max} {unit}</span>
       </div>

@@ -1,13 +1,21 @@
 export default function Header({ backendStatus }) {
+  const statusBadgeClass = {
+    online: 'badge-success',
+    offline: 'badge-error',
+    checking: 'badge-warning',
+  }[backendStatus] || 'badge-ghost'
+
   return (
-    <header style={{ marginBottom: '14px', borderBottom: '1px solid #ccc', paddingBottom: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-      <h2 style={{ margin: 0, fontSize: '18px' }}>Crop Classifier & Optimizer</h2>
-      <span style={{ fontSize: '13px' }}>
-        Backend:{' '}
-        <strong style={{ color: backendStatus === 'online' ? 'green' : backendStatus === 'offline' ? 'red' : 'gray' }}>
+    <header className="navbar mb-4 min-h-0 border-b border-base-300 px-0 pb-3">
+      <div className="flex-1">
+        <h1 className="text-xl font-bold">Crop Classifier & Optimizer</h1>
+      </div>
+      <div className="flex items-center gap-2 text-sm">
+        <span>Backend:</span>
+        <span className={`badge ${statusBadgeClass}`}>
           {backendStatus.toUpperCase()}
-        </strong>
-      </span>
+        </span>
+      </div>
     </header>
   )
 }

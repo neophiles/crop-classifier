@@ -2,9 +2,9 @@ import SliderInput from './SliderInput'
 
 export default function SoilNutrientsCard({ inputs, onChange }) {
   return (
-    <fieldset style={{ margin: 0, padding: '10px 14px', border: '1px solid #ccc', borderRadius: '4px' }}>
-      <legend style={{ fontSize: '13px', padding: '0 6px' }}>
-        <strong>Soil Nutrients (NPK & pH)</strong>
+    <fieldset className="fieldset rounded-box border border-base-300 bg-base-100 p-4">
+      <legend className="fieldset-legend px-1 text-base font-semibold">
+        Soil Nutrients (NPK & pH)
       </legend>
 
       <SliderInput
