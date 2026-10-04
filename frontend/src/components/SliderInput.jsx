@@ -6,12 +6,22 @@ export default function SliderInput({
   max,
   step = 1,
   unit = '',
+  soilStyle = false,
 }) {
   return (
-    <div className="form-control w-full">
-      <div className="mb-1 flex items-center justify-between text-sm font-semibold">
-        <span>{label}</span>
-        <span className="text-base-content/70">{value} {unit}</span>
+    <div className={`form-control w-full ${soilStyle ? 'gap-2 border-b border-base-200 py-4 first:pt-0 last:border-b-0 last:pb-0' : ''}`}>
+      <div className="flex items-end justify-between">
+        <div>
+          {soilStyle && (
+            <span className="block text-[7px] text-base-content/60">Enter Data</span>
+          )}
+          <span className={soilStyle ? 'text-[13px] font-bold text-base-content/70' : 'text-sm font-semibold'}>
+            {label}
+          </span>
+        </div>
+        <span className={soilStyle ? 'rounded-box border border-base-300 px-4 py-2 text-[9px] font-bold text-base-content/70' : 'text-base-content/70'}>
+          {value} {unit}
+        </span>
       </div>
       <input
         type="range"
@@ -24,9 +34,13 @@ export default function SliderInput({
           onChange(val)
         }}
         aria-label={label}
-        className="range range-primary range-sm w-full"
+        className={`range range-sm w-full ${soilStyle ? '' : 'range-primary'}`}
+        style={soilStyle ? {
+          color: '#4D7101',
+          '--range-thumb-size': '12px',
+        } : undefined}
       />
-      <div className="mt-1 flex justify-between text-xs text-base-content/60">
+      <div className={`flex justify-between text-xs text-base-content/60 ${soilStyle ? 'hidden' : 'mt-1'}`}>
         <span>{min}</span>
         <span>{max} {unit}</span>
       </div>

@@ -2,7 +2,7 @@ export default function Header() {
   return (
     <header className="navbar relative left-1/2 -mt-4 mb-8 min-h-0 w-screen -translate-x-1/2 bg-[#D98308] px-6 py-8 text-white shadow-md sm:-mt-6 sm:px-8">
       <div className="flex-1">
-        <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
+        <h1 className="text-[16px] font-bold tracking-tight">
           Crop Classifier
         </h1>
       </div>
