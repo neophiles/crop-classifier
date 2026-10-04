@@ -2,8 +2,8 @@ import SliderInput from './SliderInput'
 
 export default function SoilNutrientsCard({ inputs, onChange }) {
   return (
-    <section className="flex flex-col gap-3">
-      <h2 className="text-[15px] font-bold text-base-content/70">
+    <section className="flex flex-col gap-2">
+      <h2 className="w-[95%] self-center text-[15px] font-bold text-base-content/70">
         Soil Information
       </h2>
 

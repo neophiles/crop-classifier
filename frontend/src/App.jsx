@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Header from './components/Header'
 import SoilNutrientsCard from './components/SoilNutrientsCard'
 import ClimateParametersCard from './components/ClimateParametersCard'
+import FarmAreaCard from './components/FarmAreaCard'
 import ResultsPanel from './components/results/ResultsPanel'
 import HistoryPanel from './components/HistoryPanel'
 import { INITIAL_INPUTS } from './constants/defaults'
@@ -48,6 +49,7 @@ export default function App() {
       <div className="grid items-start gap-6 lg:grid-cols-2">
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <ClimateParametersCard inputs={inputs} onChange={handleInputChange} />
+          <FarmAreaCard inputs={inputs} onChange={handleInputChange} />
           <SoilNutrientsCard inputs={inputs} onChange={handleInputChange} />
 
           <button
