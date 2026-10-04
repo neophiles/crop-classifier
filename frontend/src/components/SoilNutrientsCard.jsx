@@ -7,7 +7,7 @@ export default function SoilNutrientsCard({ inputs, onChange }) {
         Soil Information
       </h2>
 
-      <fieldset className="fieldset rounded-box border border-base-300 bg-base-100 p-4 shadow-sm">
+      <fieldset className="fieldset w-[95%] self-center rounded-box border border-base-300 bg-base-100 p-4 shadow-sm">
 
         <SliderInput
           label="pH"

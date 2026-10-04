@@ -127,7 +127,7 @@ export default function ClimateParametersCard({ inputs, onChange }) {
       <h2 className="text-[15px] font-bold text-base-content/70">
         Today&apos;s Forecast
       </h2>
-      <fieldset className="fieldset rounded-box border border-base-300 bg-base-100 p-4 shadow-sm">
+      <fieldset className="fieldset w-[95%] self-center rounded-box border border-base-300 bg-base-100 p-4 shadow-sm">
         <ForecastSummary
           temperature={inputs.temperature_c}
           locationName={locationName}

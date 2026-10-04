@@ -15,7 +15,7 @@ export default function ForecastSummary({
           <strong className="text-[48px] font-bold leading-none text-[#D98308]">
             {temperature.toFixed(0)}°
           </strong>
-          <span className="mt-2 block whitespace-nowrap text-[8px] text-base-content/70">
+          <span className="mt-2 block max-w-24 break-words whitespace-normal text-[8px] text-base-content/70">
             {locationName || 'Select a location for live weather'}
           </span>
         </div>
@@ -34,29 +34,29 @@ export default function ForecastSummary({
         <WeatherIllustration />
       </div>
       <div className="mt-4 border-t border-base-300" />
-      <div className="mt-4 flex w-full justify-center gap-1 pb-1">
-        <div className="flex w-28 shrink-0 flex-col items-center gap-2">
+      <div className="mt-4 grid w-full grid-cols-[minmax(0,1fr)_minmax(0,1.7fr)] gap-2 pb-1">
+        <div className="flex min-w-0 flex-col gap-2">
           <button
             type="button"
             aria-pressed="true"
-            className="btn h-fit min-h-0 w-24 min-w-0 rounded-box border-[#4D7101] bg-[#4D7101] px-0 py-2 text-[6px] whitespace-nowrap text-white hover:border-[#3D5A01] hover:bg-[#3D5A01]"
+            className="btn h-fit min-h-0 w-full min-w-0 rounded-box border-[#4D7101] bg-[#4D7101] px-0 py-2 text-[6px] whitespace-nowrap text-white hover:border-[#3D5A01] hover:bg-[#3D5A01]"
           >
             Hourly Forecast
           </button>
           <button
             type="button"
             aria-pressed="false"
-            className="btn h-fit min-h-0 w-24 min-w-0 rounded-box border-base-300 bg-base-100 px-0 py-2 text-[6px] whitespace-nowrap text-[#4D7101] hover:bg-base-200"
+            className="btn h-fit min-h-0 w-full min-w-0 rounded-box border-base-300 bg-base-100 px-0 py-2 text-[6px] whitespace-nowrap text-[#4D7101] hover:bg-base-200"
           >
             Weekly Forecast
           </button>
         </div>
 
-        <div className="grid min-w-0 flex-1 grid-cols-4 gap-2">
+        <div className="grid min-w-0 grid-cols-[repeat(4,minmax(0,1fr))] gap-2">
           {hourlyForecast.map((hour) => (
             <div
               key={hour}
-              className="flex min-w-10 flex-col items-center justify-center gap-1 rounded-box border border-base-300 px-1 py-1"
+              className="flex w-full min-w-0 flex-col items-center justify-center gap-1 rounded-box border border-base-300 px-1 py-1"
             >
               <span className="text-[6px] font-semibold text-[#D98308]">{hour}</span>
               <svg viewBox="0 0 32 32" aria-hidden="true" className="h-5 w-5">
