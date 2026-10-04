@@ -8,6 +8,8 @@ export default function SliderInput({
   unit = '',
   soilStyle = false,
 }) {
+  const progress = ((value - min) / (max - min)) * 100
+
   return (
     <div className={`form-control w-full ${soilStyle ? 'gap-2 border-b border-base-200 py-4 first:pt-0 last:border-b-0 last:pb-0' : ''}`}>
       <div className="flex items-end justify-between">
@@ -34,10 +36,10 @@ export default function SliderInput({
           onChange(val)
         }}
         aria-label={label}
-        className={`range range-sm w-full ${soilStyle ? '' : 'range-primary'}`}
+        className={`range range-sm w-full ${soilStyle ? 'soil-range' : 'range-primary'}`}
         style={soilStyle ? {
-          color: '#4D7101',
-          '--range-thumb-size': '12px',
+          '--soil-progress': `${progress}%`,
+          '--range-thumb': '#4D7101',
         } : undefined}
       />
       <div className={`flex justify-between text-xs text-base-content/60 ${soilStyle ? 'hidden' : 'mt-1'}`}>
