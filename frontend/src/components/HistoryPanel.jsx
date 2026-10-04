@@ -24,29 +24,43 @@ export default function HistoryPanel() {
   }
 
   return (
-    <div style={{ marginTop: '10px', borderTop: '1px solid #ddd', paddingTop: '8px' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+    <div className="collapse collapse-arrow border border-base-300 bg-base-100">
+      <input
+        type="checkbox"
+        checked={isOpen}
+        onChange={handleToggleHistory}
+        aria-label="Toggle past predictions"
+      />
+      <div className="collapse-title flex items-center justify-between pr-12 text-base font-semibold">
+        <span>Past Predictions</span>
+        {history && <span className="badge badge-neutral">{history.length} records</span>}
+      </div>
+      <div className="collapse-content">
+        <div className="pt-2">
         <button
           type="button"
           onClick={handleToggleHistory}
-          style={{ padding: '4px 10px', fontSize: '12px', cursor: 'pointer' }}
+          className="btn btn-ghost btn-xs mb-2"
         >
-          {isOpen ? '▲ Hide Past Predictions' : '▼ View Past Predictions (SQLite Database)'}
+          {isOpen ? 'Hide past predictions' : 'View past predictions'}
         </button>
-        {history && <span style={{ fontSize: '11px', color: '#666' }}>{history.length} records</span>}
-      </div>
 
-      {loading && <p style={{ fontSize: '12px', margin: '4px 0' }}>Loading database records...</p>}
-      {error && <p style={{ color: 'red', fontSize: '12px', margin: '4px 0' }}>{error}</p>}
+        {loading && (
+          <p className="flex items-center gap-2 py-2 text-sm text-base-content/70">
+            <span className="loading loading-spinner loading-xs" aria-hidden="true" />
+            Loading database records...
+          </p>
+        )}
+        {error && <p className="alert alert-error py-2 text-sm">{error}</p>}
 
-      {isOpen && history && (
-        <div style={{ marginTop: '6px', maxHeight: '140px', overflowY: 'auto' }}>
+        {isOpen && history && (
+          <div className="max-h-48 overflow-auto">
           {history.length === 0 ? (
-            <p style={{ fontSize: '12px' }}>No records saved yet.</p>
+            <p className="py-2 text-sm text-base-content/70">No records saved yet.</p>
           ) : (
-            <table border="1" cellPadding="3" style={{ borderCollapse: 'collapse', width: '100%', fontSize: '11px' }}>
-              <thead>
-                <tr style={{ background: '#f5f5f5' }}>
+            <table className="table table-zebra table-xs">
+              <thead className="sticky top-0 z-10 bg-base-200">
+                <tr>
                   <th>Crop</th>
                   <th>N-P-K</th>
                   <th>Temp</th>
@@ -59,7 +73,7 @@ export default function HistoryPanel() {
               <tbody>
                 {history.map((item) => (
                   <tr key={item.id}>
-                    <td><strong style={{ textTransform: 'capitalize' }}>{item.output?.recommended_crop ?? 'N/A'}</strong></td>
+                    <td className="font-semibold capitalize">{item.output?.recommended_crop ?? 'N/A'}</td>
                     <td>{item.nitrogen}-{item.phosphorus}-{item.potassium}</td>
                     <td>{item.temperature_c}°C</td>
                     <td>{item.humidity_percent}%</td>
@@ -71,8 +85,10 @@ export default function HistoryPanel() {
               </tbody>
             </table>
           )}
+          </div>
+        )}
         </div>
-      )}
+      </div>
     </div>
   )
 }
