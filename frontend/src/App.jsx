@@ -1,22 +1,17 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Header from './components/Header'
 import SoilNutrientsCard from './components/SoilNutrientsCard'
 import ClimateParametersCard from './components/ClimateParametersCard'
 import ResultsPanel from './components/results/ResultsPanel'
 import HistoryPanel from './components/HistoryPanel'
 import { INITIAL_INPUTS } from './constants/defaults'
-import { checkBackendHealth, predictCropAndOptimize } from './api/cropService'
+import { predictCropAndOptimize } from './api/cropService'
 
 export default function App() {
   const [inputs, setInputs] = useState(INITIAL_INPUTS)
-  const [backendStatus, setBackendStatus] = useState('checking')
   const [isLoading, setIsLoading] = useState(false)
   const [result, setResult] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
-
-  useEffect(() => {
-    checkBackendHealth().then(setBackendStatus)
-  }, [])
 
   const handleInputChange = (field, value) => {
     setInputs((prev) => ({
@@ -42,7 +37,7 @@ export default function App() {
 
   return (
     <main className="container mx-auto max-w-6xl p-4 sm:p-6">
-      <Header backendStatus={backendStatus} />
+      <Header />
 
       {errorMessage && (
         <div role="alert" className="alert alert-error mb-4 py-3 text-sm">
@@ -52,8 +47,8 @@ export default function App() {
 
       <div className="grid items-start gap-6 lg:grid-cols-2">
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <SoilNutrientsCard inputs={inputs} onChange={handleInputChange} />
           <ClimateParametersCard inputs={inputs} onChange={handleInputChange} />
+          <SoilNutrientsCard inputs={inputs} onChange={handleInputChange} />
 
           <button
             type="submit"
