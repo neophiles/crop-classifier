@@ -24,6 +24,7 @@ export default function App() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setIsLoading(true)
+    setResult(null)
     setErrorMessage(null)
 
     try {
@@ -36,17 +37,24 @@ export default function App() {
     }
   }
 
+  const handleBackToInputs = () => {
+    setResult(null)
+    setErrorMessage(null)
+  }
+
+  const showInputs = !isLoading && !result
+
   return (
     <main className="container mx-auto max-w-6xl p-4 sm:p-6">
       <Header />
 
-      {errorMessage && (
+      {errorMessage && !isLoading && (
         <div role="alert" className="alert alert-error mb-4 py-3 text-sm">
           <strong>Error:</strong> {errorMessage}
         </div>
       )}
 
-      <div className="grid items-start gap-6 lg:grid-cols-2">
+      <div className={`grid items-start gap-6 lg:grid-cols-2 ${showInputs ? '' : 'hidden'}`}>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <ClimateParametersCard inputs={inputs} onChange={handleInputChange} />
           <FarmAreaCard inputs={inputs} onChange={handleInputChange} />
@@ -57,16 +65,33 @@ export default function App() {
             disabled={isLoading}
             className="btn mx-auto w-fit rounded-full border-[#D98308] bg-[#D98308] px-12 text-[15px] text-white hover:border-[#C27607] hover:bg-[#C27607]"
           >
-            {isLoading && <span className="loading loading-spinner loading-sm" aria-hidden="true" />}
-            {isLoading ? 'Processing...' : 'Analyze'}
+            Analyze
           </button>
         </form>
 
-        <div className="flex flex-col gap-4">
-          <ResultsPanel result={result} areaHa={inputs.area_ha} />
-          <HistoryPanel />
-        </div>
+        <HistoryPanel />
       </div>
+
+      {isLoading ? (
+        <section className="flex min-h-64 flex-col items-center justify-center gap-4 text-center">
+          <span className="loading loading-spinner loading-lg text-[#D98308]" aria-hidden="true" />
+          <h1 className="text-xl font-bold">Analyzing your inputs...</h1>
+          <p className="text-sm text-base-content/60">
+            Please wait while we calculate the best crop and fertilizer plan.
+          </p>
+        </section>
+      ) : result ? (
+        <section className="mx-auto flex w-full max-w-2xl flex-col gap-4">
+          <ResultsPanel result={result} areaHa={inputs.area_ha} />
+          <button
+            type="button"
+            onClick={handleBackToInputs}
+            className="btn mx-auto w-fit rounded-full border-[#D98308] bg-[#D98308] px-8 text-[15px] text-white hover:border-[#C27607] hover:bg-[#C27607]"
+          >
+            Back to Inputs
+          </button>
+        </section>
+      ) : null}
     </main>
   )
 }

@@ -9,7 +9,7 @@ export default function ForecastSummary({
   formattedTime,
 }) {
   return (
-    <div className="mb-4 rounded-box border border-base-300 bg-base-100 px-4 py-5">
+    <div className="mb-4">
       <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3">
         <div className="min-w-0">
           <strong className="text-[48px] font-bold leading-none text-[#D98308]">

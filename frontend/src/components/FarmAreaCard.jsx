@@ -2,7 +2,7 @@ import SliderInput from './SliderInput'
 
 export default function FarmAreaCard({ inputs, onChange }) {
   return (
-    <section className="flex flex-col gap-1">
+    <section className="flex flex-col gap-2">
       <h2 className="w-[95%] self-center text-[15px] font-bold text-base-content/70">
         Farm Area
       </h2>
