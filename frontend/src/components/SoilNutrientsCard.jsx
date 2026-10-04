@@ -16,6 +16,7 @@ export default function SoilNutrientsCard({ inputs, onChange }) {
           min={3.5}
           max={9.5}
           step={0.1}
+          unit="kg/ha"
           soilStyle
         />
 

@@ -53,10 +53,10 @@ export default function App() {
           <button
             type="submit"
             disabled={isLoading}
-            className="btn btn-primary w-full"
+            className="btn mx-auto w-fit rounded-full border-[#D98308] bg-[#D98308] px-12 text-[15px] text-white hover:border-[#C27607] hover:bg-[#C27607]"
           >
             {isLoading && <span className="loading loading-spinner loading-sm" aria-hidden="true" />}
-            {isLoading ? 'Processing...' : 'Submit Prediction'}
+            {isLoading ? 'Processing...' : 'Analyze'}
           </button>
         </form>
 
