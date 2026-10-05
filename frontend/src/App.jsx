@@ -54,8 +54,8 @@ export default function App() {
         </div>
       )}
 
-      <div className={`grid items-start gap-6 lg:grid-cols-2 ${showInputs ? '' : 'hidden'}`}>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <div className={`grid items-start gap-6 ${showInputs ? '' : 'hidden'}`}>
+        <form onSubmit={handleSubmit} className="mx-auto flex w-full max-w-2xl flex-col gap-4">
           <ClimateParametersCard inputs={inputs} onChange={handleInputChange} />
           <FarmAreaCard inputs={inputs} onChange={handleInputChange} />
           <SoilNutrientsCard inputs={inputs} onChange={handleInputChange} />
