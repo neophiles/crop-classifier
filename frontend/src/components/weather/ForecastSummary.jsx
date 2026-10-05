@@ -11,12 +11,12 @@ export default function ForecastSummary({
 }) {
   return (
     <div className="mb-4">
-      <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3">
+      <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-start gap-3">
         <div className="min-w-0">
           <strong className="text-[48px] font-bold leading-none text-[#D98308]">
             {temperature.toFixed(0)}°
           </strong>
-          <span className="mt-2 block max-w-24 break-words whitespace-normal text-[8px] text-base-content/70">
+          <span className="mt-1 block max-w-24 break-words whitespace-normal text-[8px] text-[#D98308] font-bold text-base-content/70">
             {locationName || 'Select a location for live weather'}
           </span>
         </div>
@@ -34,7 +34,7 @@ export default function ForecastSummary({
         </div>
         {showWeatherIllustration && <WeatherIllustration />}
       </div>
-      <div className="mt-4 border-t border-base-300" />
+      <div className="mt-2 border-t border-base-300" />
       <div className="mt-4 grid w-full grid-cols-[minmax(0,1fr)_minmax(0,1.7fr)] gap-2 pb-1">
         <div className="flex min-w-0 flex-col gap-2">
           <button
