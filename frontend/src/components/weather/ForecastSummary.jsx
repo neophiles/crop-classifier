@@ -7,6 +7,7 @@ export default function ForecastSummary({
   locationName,
   formattedDate,
   formattedTime,
+  showWeatherIllustration,
 }) {
   return (
     <div className="mb-4">
@@ -31,7 +32,7 @@ export default function ForecastSummary({
             </span>
           )}
         </div>
-        <WeatherIllustration />
+        {showWeatherIllustration && <WeatherIllustration />}
       </div>
       <div className="mt-4 border-t border-base-300" />
       <div className="mt-4 grid w-full grid-cols-[minmax(0,1fr)_minmax(0,1.7fr)] gap-2 pb-1">

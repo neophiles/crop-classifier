@@ -5,7 +5,7 @@ import { fetchLiveWeather } from '../api/weatherService'
 import { searchLocation, getUserCoordinates } from '../api/geocodingService'
 import { fetchLocationName } from '../api/nominatimService'
 
-export default function ClimateParametersCard({ inputs, onChange }) {
+export default function ClimateParametersCard({ inputs, onChange, onWeatherUpdate }) {
   const [loading, setLoading] = useState(false)
   const [statusMsg, setStatusMsg] = useState(null)
   const [isError, setIsError] = useState(false)
@@ -28,6 +28,7 @@ export default function ClimateParametersCard({ inputs, onChange }) {
       onChange('temperature_c', weather.temperature_c)
       onChange('humidity_percent', weather.humidity_percent)
       onChange('rainfall_mm', weather.rainfall_mm)
+      onWeatherUpdate(weather.weather_description)
 
       setWeatherUpdatedAt(new Date())
       setLocationName(displayName || `Coordinates: ${latitude.toFixed(2)}°, ${longitude.toFixed(2)}°`)
@@ -59,6 +60,7 @@ export default function ClimateParametersCard({ inputs, onChange }) {
       onChange('temperature_c', weather.temperature_c)
       onChange('humidity_percent', weather.humidity_percent)
       onChange('rainfall_mm', weather.rainfall_mm)
+      onWeatherUpdate(weather.weather_description)
 
       setWeatherUpdatedAt(new Date())
       const name = resolvedLocation
@@ -133,6 +135,7 @@ export default function ClimateParametersCard({ inputs, onChange }) {
           locationName={locationName}
           formattedDate={formattedWeatherDate}
           formattedTime={formattedWeatherTime}
+          showWeatherIllustration={Boolean(locationName)}
         />
 
       {/* Location Search & GPS Controls */}

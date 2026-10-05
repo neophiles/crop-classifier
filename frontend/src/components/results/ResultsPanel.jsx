@@ -1,4 +1,4 @@
-export default function ResultsPanel({ result, areaHa, inputs }) {
+export default function ResultsPanel({ result, areaHa, inputs, weatherDescription }) {
   if (!result?.output) {
     return (
       <div className="card min-h-48 border border-dashed border-base-300 bg-base-100">
@@ -38,7 +38,7 @@ export default function ResultsPanel({ result, areaHa, inputs }) {
             <dt>Humidity:</dt>
             <dd className="text-right">{inputs.humidity_percent.toFixed(0)}%</dd>
             <dt>Weather:</dt>
-            <dd className="text-right">Live weather</dd>
+            <dd className="text-right">{weatherDescription || 'Unavailable'}</dd>
           </dl>
         </div>
 

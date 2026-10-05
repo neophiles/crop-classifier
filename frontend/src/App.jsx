@@ -13,6 +13,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false)
   const [result, setResult] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
+  const [weatherDescription, setWeatherDescription] = useState(null)
 
   const handleInputChange = (field, value) => {
     setInputs((prev) => ({
@@ -56,7 +57,11 @@ export default function App() {
 
       <div className={`grid items-start gap-6 ${showInputs ? '' : 'hidden'}`}>
         <form onSubmit={handleSubmit} className="mx-auto flex w-full max-w-2xl flex-col gap-4">
-          <ClimateParametersCard inputs={inputs} onChange={handleInputChange} />
+          <ClimateParametersCard
+            inputs={inputs}
+            onChange={handleInputChange}
+            onWeatherUpdate={setWeatherDescription}
+          />
           <FarmAreaCard inputs={inputs} onChange={handleInputChange} />
           <SoilNutrientsCard inputs={inputs} onChange={handleInputChange} />
 
@@ -84,7 +89,12 @@ export default function App() {
         </section>
       ) : result ? (
         <section className="mx-auto flex w-full max-w-2xl flex-col gap-4">
-          <ResultsPanel result={result} areaHa={inputs.area_ha} inputs={inputs} />
+          <ResultsPanel
+            result={result}
+            areaHa={inputs.area_ha}
+            inputs={inputs}
+            weatherDescription={weatherDescription}
+          />
           <button
             type="button"
             onClick={handleBackToInputs}
