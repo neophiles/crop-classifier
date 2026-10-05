@@ -30,7 +30,7 @@ export default function ResultsPanel({ result, areaHa, inputs }) {
             <h2 className="text-[15px] font-bold text-[#4D7101]">Parameters</h2>
             <span className="text-[15px] font-bold text-[#4D7101]">Value</span>
           </div>
-          <dl className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-0.5 text-[10px] text-base-content/70">
+          <dl className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-0.5 text-[10px] font-bold text-base-content/70">
             <dt>Temperature:</dt>
             <dd className="text-right">{inputs.temperature_c.toFixed(0)}°C</dd>
             <dt>Precipitation:</dt>
@@ -44,7 +44,7 @@ export default function ResultsPanel({ result, areaHa, inputs }) {
 
         <div className="pb-2">
           <h2 className="mb-1 text-[15px] font-bold text-[#4D7101]">Financial Summary</h2>
-          <dl className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-0.5 text-[10px] text-base-content/70">
+          <dl className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-0.5 text-[10px] font-bold text-base-content/70">
             <dt>Profit:</dt>
             <dd className="text-right">
               PHP {output.net_profit_php?.toLocaleString() ?? 'N/A'}
@@ -56,7 +56,7 @@ export default function ResultsPanel({ result, areaHa, inputs }) {
 
         <div className="pb-2">
           <h2 className="mb-1 text-[15px] font-bold text-[#4D7101]">Crop Performance</h2>
-          <dl className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-1 text-[10px] text-base-content/70">
+          <dl className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-1 text-[10px] font-bold text-base-content/70">
             <dt>Crop Selection:</dt>
             <dd className="text-right font-medium capitalize">Status Confirmed</dd>
             <dt>Fertilizer Mix:</dt>
@@ -73,19 +73,19 @@ export default function ResultsPanel({ result, areaHa, inputs }) {
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-4 rounded-box border border-base-300 px-4 py-2 text-[10px]">
               <span className="text-xl" role="img" aria-label="Crop recommendation">🌿</span>
-              <span className="font-medium text-[#4D7101]">
+              <span className="font-bold text-[#4D7101]">
                 Crop Selection: {output.recommended_crop}
               </span>
             </div>
             <div className="flex items-center gap-4 rounded-box border border-base-300 px-4 py-2 text-[10px]">
               <span className="text-xl" role="img" aria-label="Fertilizer recommendation">🧪</span>
-              <span className="font-medium text-[#4D7101]">
+              <span className="font-bold text-[#4D7101]">
                 Fertilizer Application: Urea {output.urea_kg_ha}, DAP {output.dap_kg_ha}, MOP {output.mop_kg_ha}
               </span>
             </div>
             <div className="flex items-center gap-4 rounded-box border border-base-300 px-4 py-2 text-[10px]">
               <span className="text-xl" role="img" aria-label="Soil monitoring recommendation">🔬</span>
-              <span className="font-medium text-[#4D7101]">
+              <span className="font-bold text-[#4D7101]">
                 Soil Monitoring: Test for Nutrients
               </span>
             </div>
