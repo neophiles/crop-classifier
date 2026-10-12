@@ -2,9 +2,10 @@
 
 ## Tech Stack
 
-- **Frontend:** React 19, TypeScript, Vite, Tailwind CSS, DaisyUI
+- **Frontend:** React 19, TypeScript, Vite, Tailwind 4, DaisyUI
 - **Backend:** FastAPI, Python, SQLModel, Uvicorn
-- **Machine Learning:** Scikit-learn, Pandas, NumPy (Random Forest, Decision Trees, SVM)
+- **Data:** NumPy, Pandas, Matplotlib, Seaborn
+- **Machine Learning:** NumPy, Pandas, Scikit-learn, Pandas, NumPy
 - **Data:** Tabular soil chemistry and weather records (`indonesia_dataset.csv`)
 
 ---
@@ -13,18 +14,19 @@
 
 ```text
 crop-classifier/
-├── backend/          # FastAPI REST API
-│   ├── main.py       # API endpoints
+├── backend/              # FastAPI REST API
+│   ├── main.py           # App root
+│   ├── pyproject.toml
 │   └── requirements.txt
-├── frontend/         # React + Vite web dashboard
-│   ├── src/          # UI components and pages
+├── frontend/             # React + Vite client
+│   ├── src/              # UI components and pages
 │   └── package.json
-├── model/            # Core ML model inference package
-│   ├── src/model/    # Model loader and prediction logic
+├── model/                # Core ML model inference package
+│   ├── src/model/        # Model loader and prediction logic
 │   └── requirements.txt
-├── notebooks/        # Data exploration and model benchmarking
-│   ├── data/         # Dataset files
-│   ├── EDA.ipynb     # Exploratory Data Analysis
+├── notebooks/            # Data exploration and model benchmarking
+│   ├── data/             # Dataset files
+│   ├── EDA.ipynb         # Exploratory Data Analysis
 │   └── model_trained_on_chosen_crops.ipynb
 └── README.md
 ```
@@ -34,35 +36,33 @@ crop-classifier/
 ## Getting Started
 
 ### Prerequisites
-- Python 3.10+
-- Node.js (v18+) and npm
+- [Python 3.x](https://www.python.org/downloads/)
+- [uv](https://docs.astral.sh/uv/getting-started/installation/#standalone-installer)
+- [Node.js, npm](https://nodejs.org/en/download)
 
 ---
 
 ### 1. Backend Setup
 
-From the root directory (`crop-classifier`):
+From the root directory `crop-classifier`:
 
 ```bash
-# Create and activate a virtual environment
-python -m venv .venv
+# Navigate to the backend directory
+cd backend
 
-# On Windows (Git Bash):
-source .venv/Scripts/activate
+# Sync uv environment and dependencies
+uv sync
 
-# On Windows (PowerShell):
-# .venv\Scripts\Activate.ps1
-
-# Install dependencies
-pip install -r model/requirements.txt
-pip install "fastapi[standard]" sqlmodel asyncpg alembic
+# Run virtual environment if not already
+source .venv/Scripts/activate # Git Bash
+.venv\Scripts\Activate.ps1 # Powershell
 
 # Start the FastAPI dev server
-fastapi dev backend/main.py
+uv run fastapi dev
 ```
 
-The API will be live at `http://127.0.0.1:8000`.  
-Swagger interactive docs are available at `http://127.0.0.1:8000/docs`.
+API: `http://127.0.0.1:8000`.  
+Docs: `http://127.0.0.1:8000/docs`.
 
 ---
 
@@ -75,19 +75,19 @@ In a new terminal window:
 cd frontend
 
 # Install packages
-npm install
+npm i
 
-# Start the Vite development server
+# Start the Vite dev server
 npm run dev
 ```
 
-Open your browser at `http://localhost:5173`.
+Client: `http://localhost:5173`.
 
 ---
 
 ## Environmental Parameters Used
 
-| Parameter | Description | Source / Input |
+| Parameter | Description | Source |
 | :--- | :--- | :--- |
 | **N** | Nitrogen content in soil | User Soil Test Input |
 | **P** | Phosphorus content in soil | User Soil Test Input |
