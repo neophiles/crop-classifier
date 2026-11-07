@@ -6,6 +6,6 @@ export default function Header() {
       <div className="w-full max-w-6xl">
         <Text type="h1">Crop Classifier</Text>
       </div>
-    </div>
+    </div> 
   )
 }

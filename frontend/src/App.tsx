@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Header from "./components-v2/layout/Header";
-import InputContainer, { type PredictionResult } from "./components-v2/input/InputContainer";
-import Main from "./components-v2/layout/Main";
-import OutputContainer from "./components-v2/output/OutputContainer";
+import Header from "./components/layout/Header";
+import InputContainer, { type PredictionResult } from "./components/input/InputContainer";
+import Main from "./components/layout/Main";
+import OutputContainer from "./components/output/OutputContainer";
 
 export default function App() {
   const [prediction, setPrediction] = useState<PredictionResult | null>(null)
